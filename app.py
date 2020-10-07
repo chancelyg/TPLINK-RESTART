@@ -8,10 +8,14 @@ import logging.config
 _ROUTE_URL = '192.168.11.1'
 _PASSS_WD = 'QpQLBVBKg44fbwK'
 
+# 获取本地配置文件
+logging_yaml_path = os.path.dirname(os.path.abspath(__file__)) + '/logging.yaml'
+logs_path = os.path.dirname(os.path.abspath(__file__)) + '/logs'
+
 # 日志配置
-if not os.path.exists('logs'):
-    os.mkdir('logs')
-with open('logging.yaml', 'r', encoding='utf-8') as f:
+if not os.path.exists(logs_path):
+    os.mkdir(logs_path)
+with open(logging_yaml_path, 'r', encoding='utf-8') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
     logging.config.dictConfig(config)
 logger = logging.getLogger('main.common')
@@ -55,4 +59,5 @@ if __name__ == '__main__':
     logger.info('Start running. Route url is %s' % _ROUTE_URL)
     restart()
     logger.info('Running end')
+    
 
